@@ -16,12 +16,11 @@ bootstrap:                       ## bootstrapping the virtualenv
 	echo "currently nothing"
 
 
-#$(TOPTARGETS): $(SUBDIRS)
 clean: $(SUBDIRS)                ## clean up everything
 build: $(SUBDIRS)                ## build everything
+package: $(SUBDIRS)              ## package everything
 
 $(SUBDIRS):
-	echo $@
 	$(MAKE) -C $@ $(MAKECMDGOALS)
 
 run:                             ## run everything

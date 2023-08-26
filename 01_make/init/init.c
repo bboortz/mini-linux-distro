@@ -2,7 +2,10 @@
 #include <unistd.h>
 
 int main() {
-    printf("FOOBAR FOOBAR FOOBAR FOOBAR FOOBAR FOOBAR FOOBAR\n");
-    sleep(0xFFFFFFFF);
+    printf("\n");
+    printf("*** mini-linux-distro init ***\n");
+    printf("ENJOY the simplicity!\n");
+    printf("\n");
+    sleep(5);
     return 0;
 }

@@ -4,6 +4,8 @@ OBJS := $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
 EXE := $(BUILD_DIR)/init
 LDFLAGS := -static
 
+.PHONY: help bootstrap clean download extract build package run
+
 
 help:                            ## printing out the help
 	@echo
@@ -34,12 +36,10 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 $(EXE) : $(OBJS)
-	echo lala
-	/bin/bash -c pwd
 	$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)
 
 package: build                   ## package everything
-	find $(BUILD_DIR) | cpio -o -H newc | gzip > $(BUILD_DIR)/root.cpio.gz
+	cd $(BUILD_DIR) && find . | cpio -o -H newc | gzip > root.cpio.gz
 
 run:                             ## run 
 	./$(EXE)
