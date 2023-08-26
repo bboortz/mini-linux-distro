@@ -6,7 +6,8 @@ A minimal linux distribution for fun and education in order to learn how to buil
 * [01_make](.01_make) - an improved make process to streamline the build with the same kernel and init program
 * [02_musl_libc](02_musl_libc) - building init with musl libc
 * [03_busybox](03_busybox) - exchanging the init program with a busybox statically build binary
-* [04_toybox](04_toybox) - same like 03_busybox but with toybox
+* [04_toybox](04_toybox) - same like 03_busybox but with toybox. still with a few busybox leftovers..
+* [05_make_root](05_make_root) - only linux and toybox, mkroot from toybox's make root command for initramfs creation
 
 
 # usage
@@ -14,6 +15,7 @@ A minimal linux distribution for fun and education in order to learn how to buil
 ```
 cd 01_make
 make help
+make build
 make package
 make run
 ```
