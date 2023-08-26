@@ -16,3 +16,21 @@ make help
 make package
 make run
 ```
+
+
+# dependencies 
+
+## which you have to provide to build everything
+
+* some linux / docker container / ...
+* make
+* musl-libc
+
+
+## which will be downloaded
+
+* linux
+* busybox
+* toybox
+
+
