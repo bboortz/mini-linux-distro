@@ -2,7 +2,10 @@ BUILD_DIR := build_dir
 SRCS := init.c
 OBJS := $(addprefix $(BUILD_DIR)/,$(SRCS:.c=.o))
 EXE := $(BUILD_DIR)/init
+CC := "musl-gcc"
 LDFLAGS := -static
+
+.PHONY: help bootstrap clean download extract build package run
 
 
 help:                            ## printing out the help
@@ -16,14 +19,16 @@ help:                            ## printing out the help
 bootstrap:                       ## bootstrapping the virtualenv
 	echo "currently nothing"
 
-download:                        ## download the dependencies
-	mkdir -p download
-	echo "nothing to download"
-
 clean:                           ## clean up everything
 	rm -fr $(BUILD_DIR)
 
-build: $(EXE)                     ## build kernel
+download:                        ## download the dependencies
+	@echo "nothing to download"
+
+extract:                         ## extract the dependencies
+	@echo "nothing to extract"
+
+build: $(EXE)                    ## build 
 
 $(BUILD_DIR):
 	mkdir -p $@
@@ -32,10 +37,10 @@ $(BUILD_DIR)/%.o: %.c | $(BUILD_DIR)
 	$(CC) $(CFLAGS) $(CPPFLAGS) -c -o $@ $<
 
 $(EXE) : $(OBJS)
-	echo lala
-	/bin/bash -c pwd
 	$(CC) -o $@ $^ $(LDFLAGS) $(LDLIBS)
-	find $(BUILD_DIR) | cpio -o -H newc | gzip > $(BUILD_DIR)/root.cpio.gz
+
+package: build                   ## package everything
+	cd $(BUILD_DIR) && find . | cpio -o -H newc | gzip > root.cpio.gz
 
 run:                             ## run 
 	./$(EXE)
